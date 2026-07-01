@@ -1,14 +1,14 @@
-# rfp-answer — Claude Code Skill
+# commercetools-rfp — Claude Code Skill
 
 A Claude Code skill for answering RFPs (Requests for Proposal) with commercetools. It turns a customer RFP document into a structured, accurate proposal response — with requirement scoring, gap analysis, and a complete response document.
 
 ## What it does
 
 ```
-/rfp-answer init       → drop RFP_CONFIG.md and folder structure
-/rfp-answer analyze    → extract and score requirements from the RFP document
-/rfp-answer generate   → produce the full proposal response
-/rfp-answer review     → final completeness check before sending
+/commercetools-rfp init       → drop RFP_CONFIG.md and folder structure
+/commercetools-rfp analyze    → extract and score requirements from the RFP document
+/commercetools-rfp generate   → produce the full proposal response
+/commercetools-rfp review     → final completeness check before sending
 ```
 
 **init**: Creates `RFP_CONFIG.md` (company profile, capabilities, case studies, team, pricing) and the `RFP/` folder structure. Drop the customer's RFP document in `RFP/source/`.
@@ -31,25 +31,25 @@ A Claude Code skill for answering RFPs (Requests for Proposal) with commercetool
 This skill lives in `~/.claude/skills/`. To use it, clone this repo there:
 
 ```bash
-git clone https://github.com/benctse/rfp-skill ~/.claude/skills/rfp-answer
+git clone https://github.com/benctse/rfp-skill ~/.claude/skills/commercetools-rfp
 ```
 
 Or pull updates to an existing install:
 
 ```bash
-git -C ~/.claude/skills/rfp-answer pull
+git -C ~/.claude/skills/commercetools-rfp pull
 ```
 
 Then invoke from Claude Code:
 
 ```
-/rfp-answer init
+/commercetools-rfp init
 ```
 
 ## File structure
 
 ```
-rfp-answer/
+commercetools-rfp/
   SKILL.md                              ← main skill instructions (loaded by Claude Code)
   README.md                             ← this file
   references/
@@ -62,19 +62,19 @@ rfp-answer/
 ## Usage flow
 
 ```
-1. /rfp-answer init
+1. /commercetools-rfp init
    → Fill in RFP_CONFIG.md
    → Drop the customer's RFP in RFP/source/
 
-2. /rfp-answer analyze
+2. /commercetools-rfp analyze
    → Review RFP/analysis/requirements-analysis.md
    → Resolve any ❓ unknowns before generating
 
-3. /rfp-answer generate
+3. /commercetools-rfp generate
    → Review RFP/response/proposal-<customer>.md
    → Fill in any [TODO] placeholders
 
-4. /rfp-answer review
+4. /commercetools-rfp review
    → Fix any ⚠️ blockers flagged
    → Send
 ```

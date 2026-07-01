@@ -1,5 +1,5 @@
 ---
-name: rfp-answer
+name: commercetools-rfp
 description: Multi-mode skill for answering RFPs (Requests for Proposal) with commercetools. 'init' drops config and folder templates. 'analyze' reads the RFP and extracts requirements. 'generate' produces a structured response document. 'review' checks completeness and flags gaps.
 when_to_use:
   - "Answer an RFP or tender document for a commercetools solution"
@@ -21,10 +21,10 @@ metadata:
 Four-mode skill for turning a customer RFP document into a structured, professional proposal response — grounded in real commercetools capabilities and your company's reference material.
 
 ```
-/rfp-answer init       → drop RFP_CONFIG.md and folder structure templates
-/rfp-answer analyze    → read the RFP document, extract and score requirements
-/rfp-answer generate   → produce the full proposal response document
-/rfp-answer review     → check completeness, flag unaddressed requirements
+/commercetools-rfp init       → drop RFP_CONFIG.md and folder structure templates
+/commercetools-rfp analyze    → read the RFP document, extract and score requirements
+/commercetools-rfp generate   → produce the full proposal response document
+/commercetools-rfp review     → check completeness, flag unaddressed requirements
 ```
 
 Run `init` once to set up configuration. Fill in `RFP_CONFIG.md` with your company profile, capabilities, and team. Then run `analyze` on the customer's RFP, followed by `generate` to produce the response.
@@ -103,7 +103,7 @@ Tell the user:
 - Which files and folders were created
 - What `source:` was set to in `RFP_CONFIG.md`
 - How many reference documents were registered (or that none were added)
-- Next step: fill in the rest of `RFP_CONFIG.md` (company profile, capabilities, team), then run `/rfp-answer analyze`
+- Next step: fill in the rest of `RFP_CONFIG.md` (company profile, capabilities, team), then run `/commercetools-rfp analyze`
 
 ---
 
@@ -233,7 +233,7 @@ Tell the user:
 - Coverage: how many ✅ / ⚠️ / ❌ / ❓
 - Top 3 risks
 - Top 3 differentiators
-- Next step: review `RFP/analysis/requirements-analysis.md`, then run `/rfp-answer generate`
+- Next step: review `RFP/analysis/requirements-analysis.md`, then run `/commercetools-rfp generate`
 
 ---
 
@@ -342,7 +342,7 @@ Tell the user:
 - File created: `RFP/response/proposal-<customer-name>.md`
 - Requirements coverage: N/total
 - Any `[TODO]` items that need manual input (pricing, specific case study details, etc.)
-- Recommended next step: run `/rfp-answer review` or share the document for internal review
+- Recommended next step: run `/commercetools-rfp review` or share the document for internal review
 
 ---
 
