@@ -11,6 +11,14 @@ submission_deadline: ""          # e.g. "2026-07-15"
 evaluation_date: ""              # e.g. "2026-08-01"
 source: ""                       # Local path ("RFP/source/acme-rfp.pdf"), Google Drive URL
                                  # ("https://drive.google.com/file/d/..."), or "inline"
+
+# Past RFP responses to use as reference for tone, structure, and reusable content.
+# Accepts the same formats as source: (local path, Google Drive URL, or folder).
+# Leave empty if no references are available.
+references:
+  - ""                           # e.g. "https://drive.google.com/drive/folders/..."
+  # - "~/RFPs/past-responses/"
+  # - "RFP/references/"
 ```
 
 ---
