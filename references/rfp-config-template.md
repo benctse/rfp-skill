@@ -9,7 +9,8 @@ customer_industry: ""            # e.g. "Fashion & Apparel"
 rfp_reference: ""                # Reference number from the RFP document, if any
 submission_deadline: ""          # e.g. "2026-07-15"
 evaluation_date: ""              # e.g. "2026-08-01"
-source: ""                       # Path to the RFP document, e.g. "RFP/source/acme-rfp.pdf"
+source: ""                       # Local path ("RFP/source/acme-rfp.pdf"), Google Drive URL
+                                 # ("https://drive.google.com/file/d/..."), or "inline"
 ```
 
 ---

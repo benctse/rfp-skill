@@ -68,6 +68,7 @@ Ask the user:
 > "Where is the customer's RFP document?
 > - Drop it in `RFP/source/` and I'll find it automatically
 > - Or give me the path directly (e.g. `~/Downloads/customer-rfp.pdf`)
+> - Or give me a Google Drive link (e.g. `https://drive.google.com/file/d/...`)
 > - Or paste the requirements inline"
 
 Update `RFP_CONFIG.md` `source:` field with whatever the user provides.
@@ -104,12 +105,29 @@ If `RFP_CONFIG.md` is missing or `source:` is empty, ask inline:
 
 #### 2. Read the RFP document
 
-Load from the resolved source:
-- **PDF or DOCX** → read with available file tools
-- **Folder** (`source: RFP/source/`) → read all `.pdf`, `.docx`, `.md`, `.txt` files found there
+Detect the source type from the `source:` value and load accordingly:
+
+- **Google Drive URL** — `source:` contains `drive.google.com` or `docs.google.com`:
+  1. Extract the file ID from the URL:
+     - `https://drive.google.com/file/d/{FILE_ID}/view` → `{FILE_ID}`
+     - `https://docs.google.com/document/d/{FILE_ID}/edit` → `{FILE_ID}`
+     - `https://drive.google.com/open?id={FILE_ID}` → `{FILE_ID}`
+  2. Call `mcp__claude_ai_Google_Drive__get_file_metadata` with the file ID to confirm access and get the file name and MIME type.
+  3. If the file is a Google Doc (`application/vnd.google-apps.document`), call `mcp__claude_ai_Google_Drive__read_file_content` with `export_format: "markdown"` to get the content as Markdown.
+  4. If the file is a PDF, DOCX, or other binary, call `mcp__claude_ai_Google_Drive__download_file_content` to retrieve its text content.
+  5. If access is denied or the file doesn't exist, stop and tell the user: "I couldn't access that Google Drive file. Make sure the file is shared with your Google account connected to Claude, then try again."
+
+- **Google Drive folder URL** — URL contains `/folders/`:
+  1. Extract the folder ID from `https://drive.google.com/drive/folders/{FOLDER_ID}`.
+  2. Call `mcp__claude_ai_Google_Drive__search_files` with `query: "'{FOLDER_ID}' in parents"` to list all files in the folder.
+  3. Read each file using the same logic as above (Google Doc → `read_file_content`; binary → `download_file_content`).
+  4. Concatenate all file contents, labelling each section with the file name.
+
+- **Local file path** (`source: RFP/source/rfp.pdf` or `~/Downloads/...`) → read with available file tools
+- **Local folder** (`source: RFP/source/`) → read all `.pdf`, `.docx`, `.md`, `.txt` files found there
 - **Inline** → use content pasted by the user
 
-If the source is empty or unreadable, stop and ask the user to check the path.
+If the source is empty or unreadable, stop and ask the user to check the path or sharing permissions.
 
 #### 3. Extract requirements
 
